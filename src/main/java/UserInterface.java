@@ -1,8 +1,5 @@
 public class UserInterface {
 
-    public static void main(String[] args) {
-    }
-
     public void homeScreen (){
         System.out.printf("""
                 Welcome to Chiqui's Tacos Near Me!
