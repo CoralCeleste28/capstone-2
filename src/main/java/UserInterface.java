@@ -28,6 +28,7 @@ public class UserInterface {
                 Press 1 to add taco or burrito
                 Press 2 to add drink
                 Press 3 to add side
+                Press 4 to checkout
                 Press 0 to exit
                 """);
 
@@ -41,12 +42,19 @@ public class UserInterface {
                 selectDrinkFlavor();
             } else if (homescreenSelection == 3) {
                 addSideToOrder();
+            } else if (homescreenSelection == 4) {
+                checkout();
             } else {
                 System.out.println("Try again. PLease select a valid entry.");
                 homescreenSelection = 0;
             }
 
         } while (true);
+    }
+
+    private void checkout() {
+        System.out.println("Here is your order:");
+        System.out.println(this.order);
     }
 
     private void addSideToOrder() {
@@ -331,6 +339,8 @@ public class UserInterface {
             addDeepFriedToTaco();
         } else {
             this.tacoBurrito.setDeepFried(false);
+            System.out.println("Burrito Added");
+            System.out.println(this.tacoBurrito.toString());
             this.order.addTacoBurrito(this.tacoBurrito);
         }
     }

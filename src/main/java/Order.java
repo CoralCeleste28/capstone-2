@@ -25,4 +25,36 @@ public class Order {
     public void addSide(Side side){
         this.sides.add(side);
     }
+
+    private String tacosToString(){
+        String tacoString = "";
+
+        for (TacoBurrito tacoBurrito : this.tacoBurritos){
+            tacoString += tacoBurrito.toString() + "\n";
+        }
+        return tacoString;
+    }
+
+    private String drinksToString(){
+        String drinkString = "";
+
+        for (Drink drink : this.drinks){
+            drinkString += drink.toString() + "\n";
+        }
+        return drinkString;
+    }
+
+    private String sideToString(){
+        String sideString = "";
+
+        for (Side side : this.sides){
+            sideString += side.toString() + "\n";
+        }
+        return sideString;
+    }
+
+    @Override
+    public String toString() {
+        return tacosToString() + "\n ----------------------- \n"  + drinksToString() + "\n ----------------------- \n" + sideToString();
+    }
 }
