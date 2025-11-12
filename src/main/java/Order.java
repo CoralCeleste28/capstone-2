@@ -18,11 +18,11 @@ public class Order {
         this.tacoBurritos.add(tacoBurrito);
     }
 
-    public void addDrink(){
-
+    public void addDrink(Drink drink){
+        this.drinks.add(drink);
     }
 
-    public void addSide(){
-
+    public void addSide(Side side){
+        this.sides.add(side);
     }
 }

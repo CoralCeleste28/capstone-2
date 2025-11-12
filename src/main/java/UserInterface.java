@@ -7,6 +7,8 @@ public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     Order order = new Order();
     TacoBurrito tacoBurrito = new TacoBurrito();
+    Drink drink = new Drink();
+    Side side = new Side();
 
     public void runApp(){
         homeScreen();
@@ -36,9 +38,9 @@ public class UserInterface {
             } else if (homescreenSelection == 1) {
                 plateTypeSelection();
             } else if (homescreenSelection == 2){
-
+                selectDrinkFlavor();
             } else if (homescreenSelection == 3) {
-
+                addSideToOrder();
             } else {
                 System.out.println("Try again. PLease select a valid entry.");
                 homescreenSelection = 0;
@@ -46,6 +48,96 @@ public class UserInterface {
 
         } while (true);
     }
+
+    private void addSideToOrder() {
+        int sideSelection = 0;
+
+        do {
+            System.out.println("""
+                    Please select a side:
+                    1) Lime Wedges - Free
+                    2) Crema - Free
+                    3) Chips and Salsa - $1.50
+                    """);
+
+            sideSelection = Integer.parseInt(this.scanner.nextLine());
+
+            this.side.setPrice(0);
+
+            if (sideSelection == 1){
+                this.side.setName("Lime Wedges");
+            } else if (sideSelection == 2) {
+                this.side.setName("Crema");
+            } else if (sideSelection == 3) {
+                this.side.setName("Chips and Salsa");
+                this.side.setPrice(1.50);
+            } else {
+                System.out.println("Invalid entry. Please try again.");
+                sideSelection = 0;
+            }
+        } while (sideSelection == 0);
+        System.out.println("Side added: ");
+        System.out.println(this.side.toString());
+        this.order.addSide(this.side);
+    }
+
+    private void selectDrinkFlavor() {
+
+        int drinkSelection = 0;
+
+        do {
+            System.out.println("""
+                Please select a drink:
+                1) Horchata
+                2) Jamaica
+                3) Tamarindo
+                """);
+
+            drinkSelection = Integer.parseInt(this.scanner.nextLine());
+
+            if (drinkSelection == 1){
+                this.drink.setFlavor("Horchata");
+            } else if (drinkSelection == 2) {
+                this.drink.setFlavor("Jamaica");
+            } else if (drinkSelection == 3) {
+                this.drink.setFlavor("Tamarindo");
+            } else {
+                System.out.println("Try again. PLease select a valid entry.");
+                drinkSelection = 0;
+            }
+        } while (drinkSelection == 0);
+      selectDrinkSize();
+    }
+
+    private void selectDrinkSize() {
+        int drinkSizeSelection = 0;
+
+        do {
+            System.out.println("""
+                    Please select a size:
+                    1) Small - $2.00
+                    2) Medium - $2.50
+                    3) Large - $3.00
+                    """);
+            drinkSizeSelection = Integer.parseInt(this.scanner.nextLine());
+
+            if (drinkSizeSelection == 1){
+                this.drink.setSize("Small");
+            } else if (drinkSizeSelection == 2){
+                this.drink.setSize("Medium");
+            } else if (drinkSizeSelection == 3) {
+                this.drink.setSize("Large");
+            } else {
+                System.out.println("Try again. PLease select a valid entry.");
+                drinkSizeSelection = 0;
+            }
+        } while (drinkSizeSelection == 0);
+        System.out.println("Drink Added: ");
+        System.out.println(this.drink.toString());
+        this.order.addDrink(this.drink);
+    }
+
+
     private void plateTypeSelection(){
         int plateTypeSelection = 0;
 
