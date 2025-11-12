@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TacoBurrito {
+public class TacoBurrito implements Cost {
     String plateType;
     String shellType;
     ArrayList<Topping> topping;
@@ -74,4 +74,25 @@ public class TacoBurrito {
     }
 
 
+    @Override
+    public double calcTotalCost() {
+        double totalCost = 0;
+        double toppingCost = 0;
+
+        if (this.plateType.equalsIgnoreCase("Single Taco")){
+            totalCost += 3.50;
+        } else if (this.plateType.equalsIgnoreCase("Three Taco Plate")){
+            totalCost += 9.00;
+        } else if (this.plateType.equalsIgnoreCase("Burrito")){
+            totalCost += 8.50;
+        }
+
+        for (Topping topping : this.topping){
+            toppingCost += topping.getPrice();
+
+        }
+
+        return totalCost + toppingCost;
+
+    }
 }

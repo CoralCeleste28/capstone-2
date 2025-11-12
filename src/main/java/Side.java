@@ -1,4 +1,4 @@
-public class Side {
+public class Side implements Cost{
     String name;
     double price;
 
@@ -25,5 +25,10 @@ public class Side {
     @Override
     public String toString() {
         return this.name + " - " + this.price;
+    }
+
+    @Override
+    public double calcTotalCost() {
+        return this.price;
     }
 }

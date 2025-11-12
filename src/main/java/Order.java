@@ -1,6 +1,7 @@
+import javax.print.attribute.standard.Sides;
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Cost{
 
     ArrayList<TacoBurrito> tacoBurritos;
     ArrayList<Drink> drinks;
@@ -30,7 +31,7 @@ public class Order {
         String tacoString = "";
 
         for (TacoBurrito tacoBurrito : this.tacoBurritos){
-            tacoString += tacoBurrito.toString() + "\n";
+            tacoString += tacoBurrito.toString() + "\n\n";
         }
         return tacoString;
     }
@@ -56,5 +57,24 @@ public class Order {
     @Override
     public String toString() {
         return tacosToString() + "\n ----------------------- \n"  + drinksToString() + "\n ----------------------- \n" + sideToString();
+    }
+
+    @Override
+    public double calcTotalCost() {
+        double totalCost = 0;
+        for (TacoBurrito tacoBurrito : this.tacoBurritos){
+            totalCost += tacoBurrito.calcTotalCost();
+        }
+
+        for (Drink drink : this.drinks){
+            totalCost += drink.calcTotalCost();
+        }
+
+        for (Side side : this.sides){
+            totalCost += side.calcTotalCost();
+        }
+
+        return totalCost;
+
     }
 }
