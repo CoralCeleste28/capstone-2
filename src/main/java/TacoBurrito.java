@@ -55,4 +55,20 @@ public class TacoBurrito {
     public void setDeepFried(boolean deepFried) {
         isDeepFried = deepFried;
     }
+
+    private String getToppingString() {
+    }
+
+    @Override
+    public String toString() {
+       return
+               "PlateType: " + this.plateType + "\n" +
+               "ShellType: " + this.shellType + "\n" +
+               "Toppings: " + getToppingString() + "\n" +
+               "Deep Fried: " + (isDeepFried ? "Yes" : "No");
+
+
+    }
+
+
 }

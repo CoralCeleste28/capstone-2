@@ -35,7 +35,7 @@ public class Topping {
         return cheeseToppings;
     }
 
-    public static ArrayList<Topping> sauceToppings(){
+    public static ArrayList<Topping> sauceToppingsList(){
         ArrayList<Topping> saucesToppings = new ArrayList<>();
         saucesToppings.add(new Topping("Salsa Verde", .0));
         saucesToppings.add(new Topping("Salsa Rojo", .0));
@@ -46,7 +46,7 @@ public class Topping {
         return saucesToppings;
     }
 
-    public static ArrayList<Topping> regularToppings(){
+    public static ArrayList<Topping> regularToppingsList(){
         ArrayList<Topping> regularToppings = new ArrayList<>();
         regularToppings.add(new Topping("Lettuce", .0));
         regularToppings.add(new Topping("Cilantro", .0));
@@ -62,9 +62,22 @@ public class Topping {
 
     // HashMap
     public static HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> toppingList){
+        HashMap<Integer,Topping > toppingMap = new HashMap<>();
+        int index = 1;
 
+        // For each topping in toppingList
+        for (Topping topping : toppingList){
+            System.out.println(index + ") " + topping);
+            // Sets each index to a topping as a key and a value
+            toppingMap.put(index, topping);
+            index ++;
+        }
+        return toppingMap;
     }
 
-
-
+    // change computer code to legible english
+    @Override
+    public String toString() {
+        return this.name + " - " + this.price;
+    }
 }
