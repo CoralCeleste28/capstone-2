@@ -15,6 +15,24 @@ public class Topping {
         this.price = price;
     }
 
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public static ArrayList<Topping> meatToppingsList(){
         ArrayList<Topping> meatToppings = new ArrayList<>();
         meatToppings.add(new Topping("Carne Asada", 1.00));
@@ -58,21 +76,6 @@ public class Topping {
         regularToppings.add(new Topping("Guacamole", .0));
         regularToppings.add(new Topping("Corn", .0));
         return regularToppings;
-    }
-
-    // HashMap
-    public static HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> toppingList){
-        HashMap<Integer,Topping > toppingMap = new HashMap<>();
-        int index = 1;
-
-        // For each topping in toppingList
-        for (Topping topping : toppingList){
-            System.out.println(index + ") " + topping);
-            // Sets each index to a topping as a key and a value
-            toppingMap.put(index, topping);
-            index ++;
-        }
-        return toppingMap;
     }
 
     // change computer code to legible english

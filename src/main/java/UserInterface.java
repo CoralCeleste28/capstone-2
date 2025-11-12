@@ -17,7 +17,7 @@ public class UserInterface {
         scanner.close();
     }
 
-    public void homeScreen (){
+    private void homeScreen (){
         int homescreenSelection = 0;
 
         do {
@@ -30,7 +30,7 @@ public class UserInterface {
             homescreenSelection = Integer.parseInt(this.scanner.nextLine());
 
             if (homescreenSelection == 1){
-                placeAnOrder();
+                plateTypeSelection();
             } else if (homescreenSelection == 2) {
                 closeApp();
             } else {
@@ -41,8 +41,8 @@ public class UserInterface {
         } while (homescreenSelection == 0);
     }
 
-    private void placeAnOrder(){
-        int placeAnOrderSelection = 0;
+    private void plateTypeSelection(){
+        int plateTypeSelection = 0;
 
         do {
             System.out.println("""
@@ -52,22 +52,22 @@ public class UserInterface {
                 3 - Three Taco Plate
                 """);
 
-            placeAnOrderSelection = Integer.parseInt(this.scanner.nextLine());
+            plateTypeSelection = Integer.parseInt(this.scanner.nextLine());
 
-            if (placeAnOrderSelection == 1){
+            if (plateTypeSelection == 1){
                 this.tacoBurrito.setPlateType("Burrito");
                 shellTypeForTaco(true);
-            } else if (placeAnOrderSelection == 2) {
+            } else if (plateTypeSelection == 2) {
                 this.tacoBurrito.setPlateType("Single Taco");
                 shellTypeForTaco(false);
-            } else if (placeAnOrderSelection == 3) {
+            } else if (plateTypeSelection == 3) {
                 this.tacoBurrito.setPlateType("Three Taco Plate");
                 shellTypeForTaco(false);
             } else {
                 System.out.println("Try again. PLease select a valid entry.");
-                placeAnOrderSelection = 0;
+                plateTypeSelection = 0;
             }
-        } while (placeAnOrderSelection == 0);
+        } while (plateTypeSelection == 0);
     }
 
     private void shellTypeForTaco(boolean isBurrito){
@@ -99,6 +99,7 @@ public class UserInterface {
         } while (shellTypeForTacoChoice == 0);
 
         addToppingsToTaco();
+
     }
 
     private void printTacoTortillaOptions(){
@@ -119,8 +120,9 @@ public class UserInterface {
                3 - Bowl
                """);
     }
+
     private void addToppingsToTaco(){
-        HashMap<Integer, Topping> toppingMap = new HashMap<>();
+        HashMap<Integer, Topping> toppingMap;
         ArrayList<Topping> toppingsForTaco = new ArrayList<>();
 
         int toppingChoice = 5;
@@ -147,11 +149,15 @@ public class UserInterface {
                 System.out.println("Choose Meat Toppings");
                 System.out.println("0 - Done Adding");
                 // Hashmap = Class.Method(Class.Method)
-                toppingMap = Topping.toppingMenuHelper(Topping.meatToppingsList());
+                toppingMap = toppingMenuHelper(Topping.meatToppingsList());
                 meatChoice = Integer.parseInt(this.scanner.nextLine());
                 if (meatChoice == 0){
                     // taken to toppings general menu
                 } else {
+                    if (toppingMap.get(meatChoice) == null){
+                        System.out.println("Invalid Selection. Please Try Again.");
+                        continue;
+                    }
                    Topping meatTopping = toppingMap.get(meatChoice);
                    toppingsForTaco.add(meatTopping);
                 }
@@ -161,11 +167,15 @@ public class UserInterface {
                 System.out.println("Choose Cheese Toppings");
                 System.out.println("0 - Done Adding") ;
                 // Creating and displaying toppings
-                toppingMap = Topping.toppingMenuHelper(Topping.cheeseToppingsList());
+                toppingMap = toppingMenuHelper(Topping.cheeseToppingsList());
                 cheeseChoice = Integer.parseInt(this.scanner.nextLine());
                 if (cheeseChoice == 0){
 
                 } else {
+                    if (toppingMap.get(cheeseChoice) == null){
+                        System.out.println("Invalid Selection. Please Try Again.");
+                        continue;
+                    }
                     Topping cheeseTopping = toppingMap.get(cheeseChoice);
                     toppingsForTaco.add(cheeseTopping);
                 }
@@ -174,11 +184,15 @@ public class UserInterface {
                 int regularToppingChoice = 0;
                 System.out.println("Choose Regular Toppings");
                 System.out.println("0 - Done Adding") ;
-                toppingMap = Topping.toppingMenuHelper(Topping.regularToppingsList());
+                toppingMap = toppingMenuHelper(Topping.regularToppingsList());
                 regularToppingChoice = Integer.parseInt(this.scanner.nextLine());
                 if (regularToppingChoice == 0){
 
                 } else {
+                    if (toppingMap.get(regularToppingChoice) == null){
+                        System.out.println("Invalid Selection. Please Try Again.");
+                        continue;
+                    }
                     Topping regularTopping = toppingMap.get(regularToppingChoice);
                     toppingsForTaco.add(regularTopping);
                 }
@@ -188,11 +202,15 @@ public class UserInterface {
                 int sauceChoice = 0;
                 System.out.println("Choose Sauces");
                 System.out.println("0 - Done Adding") ;
-                toppingMap = Topping.toppingMenuHelper(Topping.sauceToppingsList());
+                toppingMap = toppingMenuHelper(Topping.sauceToppingsList());
                 sauceChoice = Integer.parseInt(this.scanner.nextLine());
                 if (sauceChoice == 0){
 
                 } else {
+                    if (toppingMap.get(sauceChoice) == null){
+                        System.out.println("Invalid Selection. Please Try Again.");
+                        continue;
+                    }
                     Topping sauceTopping = toppingMap.get(sauceChoice);
                     toppingsForTaco.add(sauceTopping);
                 }
@@ -209,6 +227,21 @@ public class UserInterface {
             this.tacoBurrito.setDeepFried(false);
             this.order.addTacoBurrito(this.tacoBurrito);
         }
+    }
+
+    // HashMap
+    public static HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> toppingList){
+        HashMap<Integer,Topping > toppingMap = new HashMap<>();
+        int index = 1;
+
+        // For each topping in toppingList
+        for (Topping topping : toppingList){
+            System.out.println(index + " - " + topping);
+            // Sets each index to a topping as a key and a value
+            toppingMap.put(index, topping);
+            index ++;
+        }
+        return toppingMap;
     }
 
     private void addDeepFriedToTaco() {
@@ -232,8 +265,7 @@ public class UserInterface {
         } while (deepFriedChoice == 0);
 
         this.order.addTacoBurrito(this.tacoBurrito);
-        System.out.println("""
-                Taco Add
-                """);
+        System.out.println("Taco Added: ");
+        System.out.println(this.tacoBurrito);
     }
 }

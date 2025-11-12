@@ -57,6 +57,11 @@ public class TacoBurrito {
     }
 
     private String getToppingString() {
+        String toppingString = "";
+        for (Topping topping : this.topping){
+            toppingString += topping.getName() + ", ";
+        }
+        return toppingString;
     }
 
     @Override
@@ -66,8 +71,6 @@ public class TacoBurrito {
                "ShellType: " + this.shellType + "\n" +
                "Toppings: " + getToppingString() + "\n" +
                "Deep Fried: " + (isDeepFried ? "Yes" : "No");
-
-
     }
 
 
