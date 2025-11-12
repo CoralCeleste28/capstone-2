@@ -23,24 +23,29 @@ public class UserInterface {
         do {
             System.out.printf("""
                 Welcome to Chiqui's Tacos Near Me!
-                Press 1 to place an order
-                Press 2 to exit
+                Press 1 to add taco or burrito
+                Press 2 to add drink
+                Press 3 to add side
+                Press 0 to exit
                 """);
 
             homescreenSelection = Integer.parseInt(this.scanner.nextLine());
 
-            if (homescreenSelection == 1){
-                plateTypeSelection();
-            } else if (homescreenSelection == 2) {
+            if (homescreenSelection == 0){
                 closeApp();
+            } else if (homescreenSelection == 1) {
+                plateTypeSelection();
+            } else if (homescreenSelection == 2){
+
+            } else if (homescreenSelection == 3) {
+
             } else {
                 System.out.println("Try again. PLease select a valid entry.");
                 homescreenSelection = 0;
             }
 
-        } while (homescreenSelection == 0);
+        } while (true);
     }
-
     private void plateTypeSelection(){
         int plateTypeSelection = 0;
 
@@ -122,8 +127,11 @@ public class UserInterface {
     }
 
     private void addToppingsToTaco(){
+        // Creating empty hashmap named toppingMap
+        // In the hashmap there is integer and topping section
         HashMap<Integer, Topping> toppingMap;
-        ArrayList<Topping> toppingsForTaco = new ArrayList<>();
+        // Creating an array list named toppingsForTacoArrayList with NULL Toppings- It will be filled with toppings
+        ArrayList<Topping> toppingsForTacoArrayList = new ArrayList<>();
 
         int toppingChoice = 5;
 
@@ -140,7 +148,8 @@ public class UserInterface {
             toppingChoice = Integer.parseInt(this.scanner.nextLine());
 
             if (toppingChoice == 0){
-                this.tacoBurrito.setTopping(toppingsForTaco);
+                this.tacoBurrito.setToppings(toppingsForTacoArrayList);
+                // Break loop to deep fried
                 break;
             }
 
@@ -149,6 +158,8 @@ public class UserInterface {
                 System.out.println("Choose Meat Toppings");
                 System.out.println("0 - Done Adding");
                 // Hashmap = Class.Method(Class.Method)
+                // Inserting meatToppingList into toppingMenuHelper.
+                // toppingMenuHelper fills out the topping map hash map and displays it to the user
                 toppingMap = toppingMenuHelper(Topping.meatToppingsList());
                 meatChoice = Integer.parseInt(this.scanner.nextLine());
                 if (meatChoice == 0){
@@ -156,10 +167,13 @@ public class UserInterface {
                 } else {
                     if (toppingMap.get(meatChoice) == null){
                         System.out.println("Invalid Selection. Please Try Again.");
+                        // Goes back to the beginning of the loop
                         continue;
                     }
+                    // Gets topping info (name and price)
                    Topping meatTopping = toppingMap.get(meatChoice);
-                   toppingsForTaco.add(meatTopping);
+                    // Adds meat topping to topppingsForTacoArrayList
+                   toppingsForTacoArrayList.add(meatTopping);
                 }
 
             } else if (toppingChoice == 2) {
@@ -177,7 +191,7 @@ public class UserInterface {
                         continue;
                     }
                     Topping cheeseTopping = toppingMap.get(cheeseChoice);
-                    toppingsForTaco.add(cheeseTopping);
+                    toppingsForTacoArrayList.add(cheeseTopping);
                 }
 
             } else if (toppingChoice == 3) {
@@ -194,7 +208,7 @@ public class UserInterface {
                         continue;
                     }
                     Topping regularTopping = toppingMap.get(regularToppingChoice);
-                    toppingsForTaco.add(regularTopping);
+                    toppingsForTacoArrayList.add(regularTopping);
                 }
 
 
@@ -212,7 +226,7 @@ public class UserInterface {
                         continue;
                     }
                     Topping sauceTopping = toppingMap.get(sauceChoice);
-                    toppingsForTaco.add(sauceTopping);
+                    toppingsForTacoArrayList.add(sauceTopping);
                 }
 
             } else {
@@ -227,21 +241,6 @@ public class UserInterface {
             this.tacoBurrito.setDeepFried(false);
             this.order.addTacoBurrito(this.tacoBurrito);
         }
-    }
-
-    // HashMap
-    public static HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> toppingList){
-        HashMap<Integer,Topping > toppingMap = new HashMap<>();
-        int index = 1;
-
-        // For each topping in toppingList
-        for (Topping topping : toppingList){
-            System.out.println(index + " - " + topping);
-            // Sets each index to a topping as a key and a value
-            toppingMap.put(index, topping);
-            index ++;
-        }
-        return toppingMap;
     }
 
     private void addDeepFriedToTaco() {
@@ -267,5 +266,32 @@ public class UserInterface {
         this.order.addTacoBurrito(this.tacoBurrito);
         System.out.println("Taco Added: ");
         System.out.println(this.tacoBurrito);
+    }
+
+    // THIS HASHMAP STARTS EMPTY AND THIS METHOD FILLS IT OUT ACCORDING TO THE USERINPUT
+    // HashMap has two sections: Integer and Topping (Key and Value) named toppingMenuHelper
+    // The parameter is ONE of the arraylists in the topping class
+    public HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> selectedToppingList){
+        // New hash map with NULL integers and Toppings named toppingMap
+        HashMap<Integer,Topping > toppingMap = new HashMap<>();
+        int index = 1;
+
+        // For each topping in toppingList
+        for (Topping topping : selectedToppingList){
+            // The if statement handles the pricing of the topping according to teh plate chosen
+            if (this.tacoBurrito.getPlateType().equalsIgnoreCase("Single Taco")){
+                // Topping price for taco is already set
+            } else if (this.tacoBurrito.getPlateType().equalsIgnoreCase("Three Taco Plate")) {
+                topping.setPrice(2.00);
+            } else if (this.tacoBurrito.getPlateType().equalsIgnoreCase("Burrito")) {
+                topping.setPrice(3.00);
+            }
+            // The toString method displays the topping name and the price
+            System.out.println(index + " - " + topping.toString());
+            // Sets each index to a topping as a key and a value
+            toppingMap.put(index, topping);
+            index ++;
+        }
+        return toppingMap;
     }
 }

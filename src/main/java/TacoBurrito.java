@@ -48,7 +48,7 @@ public class TacoBurrito {
         this.shellType = shellType;
     }
 
-    public void setTopping(ArrayList<Topping> topping) {
+    public void setToppings(ArrayList<Topping> topping) {
         this.topping = topping;
     }
 
