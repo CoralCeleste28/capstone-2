@@ -29,6 +29,9 @@ public class Order implements Cost{
     private String tacosToString(){
         String tacoString = "";
 
+        if (this.tacoBurritos == null){
+            return tacoString;
+        }
         for (TacoBurrito tacoBurrito : this.tacoBurritos){
             tacoString += tacoBurrito.toString() + "\n\n";
         }
@@ -38,6 +41,9 @@ public class Order implements Cost{
     private String drinksToString(){
         String drinkString = "";
 
+        if (this.drinks == null){
+            return drinkString;
+        }
         for (Drink drink : this.drinks){
             drinkString += drink.toString() + "\n";
         }
@@ -47,6 +53,10 @@ public class Order implements Cost{
     private String sidesToString(){
         String sideString = "";
 
+        if (this.sides == null){
+            return sideString;
+        }
+
         for (Side side : this.sides){
             sideString += side.toString() + "\n";
         }
@@ -55,7 +65,13 @@ public class Order implements Cost{
 
     @Override
     public String toString() {
-        return tacosToString() + "\n ----------------------- \n"  + drinksToString() + "\n ----------------------- \n" + sidesToString() + "\n ----------------------- \n" + "Total : " + calcTotalCost();
+        boolean isTacoEmpty = tacosToString().isEmpty() || tacosToString().isBlank();
+        boolean isDrinkEmpty = drinksToString().isEmpty() || drinksToString().isBlank();
+        boolean isSideEmpty = sidesToString().isEmpty() || sidesToString().isBlank();
+
+        return (!isTacoEmpty ? (tacosToString() + "=============================================\n") : "") +
+               (!isDrinkEmpty ? (drinksToString() + "=============================================\n") : "") +
+                (!isSideEmpty ?(sidesToString() + "=============================================\n") : "");
     }
 
     @Override

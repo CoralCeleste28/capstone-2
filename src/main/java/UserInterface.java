@@ -56,6 +56,7 @@ public class UserInterface {
     }
 
     private void checkout() {
+        System.out.println("");
         System.out.println("Here is your order:");
         System.out.println(this.order);
     }
@@ -256,10 +257,10 @@ public class UserInterface {
 
                 do {
                     System.out.println("""
+                        
                         Would you like to add extra toppings?
                         1) Si
-                        2) No
-                        """);
+                        2) No""");
 
                     extraToppingsChoice = Integer.parseInt(this.scanner.nextLine());
 
@@ -325,7 +326,7 @@ public class UserInterface {
                 System.out.println(" ");
                 System.out.println("Choose Regular Toppings");
                 System.out.println("0) Done Adding") ;
-                toppingMap = toppingMenuHelper(Topping.regularToppingsList());
+                toppingMap = toppingMenuHelper(Topping.regularToppingsList(false));
                 regularToppingChoice = Integer.parseInt(this.scanner.nextLine());
                 if (regularToppingChoice == 0){
 
@@ -344,7 +345,7 @@ public class UserInterface {
                 System.out.println(" ");
                 System.out.println("Choose Sauces");
                 System.out.println("0) Done Adding") ;
-                toppingMap = toppingMenuHelper(Topping.sauceToppingsList());
+                toppingMap = toppingMenuHelper(Topping.sauceToppingsList(false));
                 sauceChoice = Integer.parseInt(this.scanner.nextLine());
                 if (sauceChoice == 0){
 
@@ -389,6 +390,9 @@ public class UserInterface {
                     3) Regular Toppings
                     4) Sauces
                     """);
+
+            extraToppingChoice = Integer.parseInt(this.scanner.nextLine());
+
             if (extraToppingChoice == 0){
                 break;
             }
@@ -440,7 +444,7 @@ public class UserInterface {
                 System.out.println(" ");
                 System.out.println("Choose Regular Toppings");
                 System.out.println("0) Done Adding") ;
-                toppingMap = toppingMenuHelper(Topping.regularToppingsList());
+                toppingMap = toppingMenuHelper(Topping.regularToppingsList(true));
                 regularToppingChoice = Integer.parseInt(this.scanner.nextLine());
                 if (regularToppingChoice == 0){
 
@@ -459,7 +463,7 @@ public class UserInterface {
                 System.out.println(" ");
                 System.out.println("Choose Sauces");
                 System.out.println("0) Done Adding") ;
-                toppingMap = toppingMenuHelper(Topping.sauceToppingsList());
+                toppingMap = toppingMenuHelper(Topping.sauceToppingsList(true));
                 sauceChoice = Integer.parseInt(this.scanner.nextLine());
                 if (sauceChoice == 0){
 
@@ -488,8 +492,8 @@ public class UserInterface {
                 
                 Would you like your taco deep fried?
                 1) Yes
-                2) No
-                """);
+                2) No""");
+
             deepFriedChoice = Integer.parseInt(this.scanner.nextLine());
 
             if (deepFriedChoice == 1){
