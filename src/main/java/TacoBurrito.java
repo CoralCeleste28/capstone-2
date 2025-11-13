@@ -11,15 +11,6 @@ public class TacoBurrito implements Cost {
         this.topping = new ArrayList<>();
     }
 
-    // tacoBurrito is made up of plateType, shellType, topping arraylist and isDeepFried
-    public TacoBurrito(String plateType, String shellType, ArrayList<Topping> topping, boolean isDeepFried){
-        this.plateType = plateType;
-        this.shellType = shellType;
-        this.topping = topping;
-        this.isDeepFried = isDeepFried;
-
-    }
-
     public void deepFried(){
 
     }
