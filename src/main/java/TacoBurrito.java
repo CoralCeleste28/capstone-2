@@ -6,10 +6,12 @@ public class TacoBurrito implements Cost {
     ArrayList<Topping> topping;
     boolean isDeepFried;
 
+    // tacoBurrito is made up of an arraylist named topping
     public TacoBurrito(){
         this.topping = new ArrayList<>();
     }
 
+    // tacoBurrito is made up of plateType, shellType, topping arraylist and isDeepFried
     public TacoBurrito(String plateType, String shellType, ArrayList<Topping> topping, boolean isDeepFried){
         this.plateType = plateType;
         this.shellType = shellType;
@@ -56,9 +58,12 @@ public class TacoBurrito implements Cost {
         isDeepFried = deepFried;
     }
 
+
     private String getToppingString() {
         String toppingString = "";
+        // For every topping named topping in this.topping arraylist
         for (Topping topping : this.topping){
+            // Add the topping name to the toppingString with ", "
             toppingString += topping.getName() + ", ";
         }
         return toppingString;
@@ -71,6 +76,7 @@ public class TacoBurrito implements Cost {
                "ShellType: " + this.shellType + "\n" +
                "Toppings: " + getToppingString() + "\n" +
                "Deep Fried: " + (isDeepFried ? "Yes" : "No");
+                //
     }
 
 

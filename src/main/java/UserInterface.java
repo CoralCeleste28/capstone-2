@@ -145,7 +145,6 @@ public class UserInterface {
         this.order.addDrink(this.drink);
     }
 
-
     private void plateTypeSelection(){
         int plateTypeSelection = 0;
 

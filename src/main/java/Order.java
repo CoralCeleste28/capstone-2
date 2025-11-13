@@ -1,4 +1,3 @@
-import javax.print.attribute.standard.Sides;
 import java.util.ArrayList;
 
 public class Order implements Cost{
@@ -45,7 +44,7 @@ public class Order implements Cost{
         return drinkString;
     }
 
-    private String sideToString(){
+    private String sidesToString(){
         String sideString = "";
 
         for (Side side : this.sides){
@@ -56,7 +55,7 @@ public class Order implements Cost{
 
     @Override
     public String toString() {
-        return tacosToString() + "\n ----------------------- \n"  + drinksToString() + "\n ----------------------- \n" + sideToString();
+        return tacosToString() + "\n ----------------------- \n"  + drinksToString() + "\n ----------------------- \n" + sidesToString() + "\n ----------------------- \n" + "Total : " + calcTotalCost();
     }
 
     @Override
