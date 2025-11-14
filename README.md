@@ -64,4 +64,7 @@ This POS application is tailored for Chiqi's Tacos Near Me operations. This appl
 ![checkout.png](Images/checkout.png)
 
 # Cool Code
+I like using ternaries to hard code the arraylists. This allows the arraylist to be filled according to the boolean condition. 
+This helps reduce duplicate code. (I could have coded additional arraylists but it would be a lot of duplicate codes)
 ![cool-code.png](Images/cool-code.png)
+
