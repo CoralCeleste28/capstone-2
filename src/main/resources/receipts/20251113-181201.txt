@@ -1,0 +1,6 @@
+PlateType: Single Taco
+ShellType: Hard Shell
+Toppings: Chipotle, 
+Deep Fried: No
+=============================================
+Total: $3.5

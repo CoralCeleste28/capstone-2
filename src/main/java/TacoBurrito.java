@@ -67,7 +67,6 @@ public class TacoBurrito implements Cost {
                "ShellType: " + this.shellType + "\n" +
                "Toppings: " + getToppingString() + "\n" +
                "Deep Fried: " + (isDeepFried ? "Yes" : "No");
-                //
     }
 
 

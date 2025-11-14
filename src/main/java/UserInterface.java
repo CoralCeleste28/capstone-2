@@ -56,6 +56,8 @@ public class UserInterface {
     }
 
     private void checkout() {
+        Receipt receipt = new Receipt(this.order);
+        receipt.writeReceipt();
         System.out.println("");
         System.out.println("Here is your order:");
         System.out.println(this.order);
@@ -66,11 +68,11 @@ public class UserInterface {
 
         do {
             System.out.println("""
+                    
                     Please select a side:
                     1) Lime Wedges - Free
                     2) Crema - Free
-                    3) Chips and Salsa - $1.50
-                    """);
+                    3) Chips and Salsa - $1.50""");
 
             sideSelection = Integer.parseInt(this.scanner.nextLine());
 
@@ -88,8 +90,10 @@ public class UserInterface {
                 sideSelection = 0;
             }
         } while (sideSelection == 0);
+        System.out.println("");
         System.out.println("Side added: ");
         System.out.println(this.side.toString());
+        System.out.println("");
         this.order.addSide(this.side);
     }
 
@@ -99,6 +103,7 @@ public class UserInterface {
 
         do {
             System.out.println("""
+                
                 Please select a drink:
                 1) Horchata
                 2) Jamaica
@@ -126,11 +131,12 @@ public class UserInterface {
 
         do {
             System.out.println("""
+                    
                     Please select a size:
                     1) Small - $2.00
                     2) Medium - $2.50
-                    3) Large - $3.00
-                    """);
+                    3) Large - $3.00 """);
+
             drinkSizeSelection = Integer.parseInt(this.scanner.nextLine());
 
             if (drinkSizeSelection == 1){
@@ -144,8 +150,10 @@ public class UserInterface {
                 drinkSizeSelection = 0;
             }
         } while (drinkSizeSelection == 0);
+        System.out.println("");
         System.out.println("Drink Added: ");
         System.out.println(this.drink.toString());
+        System.out.println("");
         this.order.addDrink(this.drink);
     }
 
@@ -368,8 +376,7 @@ public class UserInterface {
             addDeepFriedToTaco();
         } else {
             this.tacoBurrito.setDeepFried(false);
-            System.out.println(" ");
-            System.out.println();
+            System.out.println("");
             System.out.println("Burrito Added");
             System.out.println(this.tacoBurrito.toString());
             System.out.println(" ");
@@ -507,8 +514,10 @@ public class UserInterface {
         } while (deepFriedChoice == 0);
 
         this.order.addTacoBurrito(this.tacoBurrito);
+        System.out.println("");
         System.out.println("Taco Added: ");
         System.out.println(this.tacoBurrito);
+        System.out.println("");
     }
 
     // THIS HASHMAP STARTS EMPTY AND THIS METHOD FILLS IT OUT ACCORDING TO THE USERINPUT

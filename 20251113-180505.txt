@@ -1,0 +1,11 @@
+PlateType: Burrito
+ShellType: Flour
+Toppings: 
+Deep Fried: No
+
+=============================================
+Medium - Horchata
+=============================================
+Chips and Salsa - 1.5
+=============================================
+Total: $12.5

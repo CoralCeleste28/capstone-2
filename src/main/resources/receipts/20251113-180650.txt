@@ -1,0 +1,11 @@
+PlateType: Single Taco
+ShellType: Corn
+Toppings: 
+Deep Fried: No
+
+=============================================
+Medium - Horchata
+=============================================
+Crema - 0.0
+=============================================
+Total: $6.0

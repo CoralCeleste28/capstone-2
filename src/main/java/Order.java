@@ -33,7 +33,7 @@ public class Order implements Cost{
             return tacoString;
         }
         for (TacoBurrito tacoBurrito : this.tacoBurritos){
-            tacoString += tacoBurrito.toString() + "\n\n";
+            tacoString += tacoBurrito.toString() + "\n";
         }
         return tacoString;
     }
@@ -71,7 +71,8 @@ public class Order implements Cost{
 
         return (!isTacoEmpty ? (tacosToString() + "=============================================\n") : "") +
                (!isDrinkEmpty ? (drinksToString() + "=============================================\n") : "") +
-                (!isSideEmpty ?(sidesToString() + "=============================================\n") : "");
+                (!isSideEmpty ?(sidesToString() + "=============================================\n") : "") +
+                "Total: $" + calcTotalCost() + "\n";
     }
 
     @Override
