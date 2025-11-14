@@ -4,7 +4,6 @@ public class Drink implements Cost {
 
 
     public Drink(){
-
     }
 
     // Getters

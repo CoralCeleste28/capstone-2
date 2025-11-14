@@ -1,21 +1,18 @@
 import java.util.ArrayList;
 
 public class TacoBurrito implements Cost {
-    String plateType;
-    String shellType;
-    ArrayList<Topping> topping;
-    boolean isDeepFried;
 
-    // tacoBurrito is made up of an arraylist named topping
+    // Declare variables
+    private String plateType;
+    private String shellType;
+    private ArrayList<Topping> toppingList;
+    private boolean isDeepFried;
+
     public TacoBurrito(){
-        this.topping = new ArrayList<>();
+        this.toppingList = new ArrayList<>();
     }
 
-    public void deepFried(){
-
-    }
-
-    // Getters
+    // GETTERS
     public String getPlateType() {
         return plateType;
     }
@@ -24,15 +21,15 @@ public class TacoBurrito implements Cost {
         return shellType;
     }
 
-    public ArrayList<Topping> getTopping() {
-        return topping;
+    public ArrayList<Topping> getToppingList() {
+        return toppingList;
     }
 
     public boolean isDeepFried() {
         return isDeepFried;
     }
 
-    // Setters
+    // SETTERS
     public void setPlateType(String plateType) {
         this.plateType = plateType;
     }
@@ -42,18 +39,19 @@ public class TacoBurrito implements Cost {
     }
 
     public void setToppings(ArrayList<Topping> topping) {
-        this.topping = topping;
+        this.toppingList = topping;
     }
 
     public void setDeepFried(boolean deepFried) {
         isDeepFried = deepFried;
     }
 
-
+    // HELPER METHOD
+    // PRINTS SELECTED TOPPINGS ", "
     private String getToppingString() {
         String toppingString = "";
         // For every topping named topping in this.topping arraylist
-        for (Topping topping : this.topping){
+        for (Topping topping : this.toppingList){
             // Add the topping name to the toppingString with ", "
             toppingString += topping.getName() + ", ";
         }
@@ -66,29 +64,28 @@ public class TacoBurrito implements Cost {
                "PlateType: " + this.plateType + "\n" +
                "ShellType: " + this.shellType + "\n" +
                "Toppings: " + getToppingString() + "\n" +
+               // Ternary : (condition) ? value if true : value if false
                "Deep Fried: " + (isDeepFried ? "Yes" : "No");
     }
 
 
     @Override
     public double calcTotalCost() {
-        double totalCost = 0;
+        double tacoBurritoCost = 0;
         double toppingCost = 0;
 
         if (this.plateType.equalsIgnoreCase("Single Taco")){
-            totalCost += 3.50;
+            tacoBurritoCost += 3.50;
         } else if (this.plateType.equalsIgnoreCase("Three Taco Plate")){
-            totalCost += 9.00;
+            tacoBurritoCost += 9.00;
         } else if (this.plateType.equalsIgnoreCase("Burrito")){
-            totalCost += 8.50;
+            tacoBurritoCost += 8.50;
         }
 
-        for (Topping topping : this.topping){
+        for (Topping topping : this.toppingList){
             toppingCost += topping.getPrice();
-
         }
-
-        return totalCost + toppingCost;
+        return tacoBurritoCost + toppingCost;
 
     }
 }

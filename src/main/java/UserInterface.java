@@ -3,22 +3,21 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class UserInterface {
-
+    // Declare Variables
     Scanner scanner = new Scanner(System.in);
     Order order = new Order();
     TacoBurrito tacoBurrito = new TacoBurrito();
     Drink drink = new Drink();
     Side side = new Side();
 
+    // ESSENTIAL TASK FUNCTIONS RUN_APP - CLOSE_APP - HOMESCREEN - CHECKOUT
     public void runApp(){
         homeScreen();
     }
-
     private void closeApp() {
         System.out.println("Thank you for vising Chiqui's Near Me");
         scanner.close();
     }
-
     private void homeScreen (){
         int homescreenSelection = 0;
 
@@ -54,109 +53,15 @@ public class UserInterface {
 
         } while (true);
     }
-
     private void checkout() {
         Receipt receipt = new Receipt(this.order);
         receipt.writeReceipt();
         System.out.println("");
         System.out.println("Here is your order:");
-        System.out.println(this.order);
+        System.out.println(this.order.toString());
     }
 
-    private void addSideToOrder() {
-        int sideSelection = 0;
-
-        do {
-            System.out.println("""
-                    
-                    Please select a side:
-                    1) Lime Wedges - Free
-                    2) Crema - Free
-                    3) Chips and Salsa - $1.50""");
-
-            sideSelection = Integer.parseInt(this.scanner.nextLine());
-
-            this.side.setPrice(0);
-
-            if (sideSelection == 1){
-                this.side.setName("Lime Wedges");
-            } else if (sideSelection == 2) {
-                this.side.setName("Crema");
-            } else if (sideSelection == 3) {
-                this.side.setName("Chips and Salsa");
-                this.side.setPrice(1.50);
-            } else {
-                System.out.println("Invalid entry. Please try again.");
-                sideSelection = 0;
-            }
-        } while (sideSelection == 0);
-        System.out.println("");
-        System.out.println("Side added: ");
-        System.out.println(this.side.toString());
-        System.out.println("");
-        this.order.addSide(this.side);
-    }
-
-    private void selectDrinkFlavor() {
-
-        int drinkSelection = 0;
-
-        do {
-            System.out.println("""
-                
-                Please select a drink:
-                1) Horchata
-                2) Jamaica
-                3) Tamarindo
-                """);
-
-            drinkSelection = Integer.parseInt(this.scanner.nextLine());
-
-            if (drinkSelection == 1){
-                this.drink.setFlavor("Horchata");
-            } else if (drinkSelection == 2) {
-                this.drink.setFlavor("Jamaica");
-            } else if (drinkSelection == 3) {
-                this.drink.setFlavor("Tamarindo");
-            } else {
-                System.out.println("Try again. PLease select a valid entry.");
-                drinkSelection = 0;
-            }
-        } while (drinkSelection == 0);
-      selectDrinkSize();
-    }
-
-    private void selectDrinkSize() {
-        int drinkSizeSelection = 0;
-
-        do {
-            System.out.println("""
-                    
-                    Please select a size:
-                    1) Small - $2.00
-                    2) Medium - $2.50
-                    3) Large - $3.00 """);
-
-            drinkSizeSelection = Integer.parseInt(this.scanner.nextLine());
-
-            if (drinkSizeSelection == 1){
-                this.drink.setSize("Small");
-            } else if (drinkSizeSelection == 2){
-                this.drink.setSize("Medium");
-            } else if (drinkSizeSelection == 3) {
-                this.drink.setSize("Large");
-            } else {
-                System.out.println("Try again. PLease select a valid entry.");
-                drinkSizeSelection = 0;
-            }
-        } while (drinkSizeSelection == 0);
-        System.out.println("");
-        System.out.println("Drink Added: ");
-        System.out.println(this.drink.toString());
-        System.out.println("");
-        this.order.addDrink(this.drink);
-    }
-
+    // TACO_BURRITO METHODS
     private void plateTypeSelection(){
         int plateTypeSelection = 0;
 
@@ -186,7 +91,6 @@ public class UserInterface {
             }
         } while (plateTypeSelection == 0);
     }
-
     private void shellTypeForTaco(boolean isBurrito){
         int shellTypeForTacoChoice = 0;
 
@@ -218,30 +122,10 @@ public class UserInterface {
         addToppingsToTaco();
 
     }
-
-    private void printTacoTortillaOptions(){
-        System.out.println("""
-                
-                Choose tortilla type:
-                1) Corn
-                2) Flour
-                3) Hard Shell""");
-
-    }
-
-    private void printBurritoTortillaOptions(){
-        System.out.println("""
-               
-               Choose tortilla type:
-               1) Corn
-               2) Flour
-               3) Bowl""");
-    }
-
     private void addToppingsToTaco(){
         // Creating empty hashmap named toppingMap
         // In the hashmap there is integer and topping section
-        HashMap<Integer, Topping> toppingMap = new HashMap<>();
+        HashMap<Integer, Topping> toppingMap = new HashMap<>();  
         // Creating an array list named toppingsForTacoArrayList with NULL Toppings- It will be filled with toppings
         ArrayList<Topping> toppingsForTacoArrayList = new ArrayList<>();
 
@@ -273,7 +157,11 @@ public class UserInterface {
                     extraToppingsChoice = Integer.parseInt(this.scanner.nextLine());
 
                     if(extraToppingsChoice == 1){
-                        this.tacoBurrito.setToppings(addExtraToppings(toppingsForTacoArrayList, toppingMap));
+                        // userpickedtoppings arraylist and hash map () for addExtraToppings
+                        ArrayList<Topping> tempToppingList = addExtraToppings(toppingsForTacoArrayList, toppingMap);
+                        // Setting ALL chosen toppings to tacoBurrito
+                        // Toppings will continue to be stored in the toppingsForTacoArrayList and returned by the method
+                        this.tacoBurrito.setToppings(tempToppingList);
                     } else if (extraToppingsChoice == 2) {
                         this.tacoBurrito.setToppings(toppingsForTacoArrayList);
                     } else {
@@ -299,15 +187,16 @@ public class UserInterface {
                 if (meatChoice == 0){
                     // taken to toppings general menu
                 } else {
+                    // if meat choice in toppingMap is null
                     if (toppingMap.get(meatChoice) == null){
                         System.out.println("Invalid Selection. Please Try Again.");
                         // Goes back to the beginning of the loop
                         continue;
                     }
                     // Gets topping info (name and price)
-                   Topping meatTopping = toppingMap.get(meatChoice);
+                    Topping meatTopping = toppingMap.get(meatChoice);
                     // Adds meat topping to topppingsForTacoArrayList
-                   toppingsForTacoArrayList.add(meatTopping);
+                    toppingsForTacoArrayList.add(meatTopping);
                 }
 
             } else if (toppingChoice == 2) {
@@ -383,7 +272,6 @@ public class UserInterface {
             this.order.addTacoBurrito(this.tacoBurrito);
         }
     }
-
     private ArrayList<Topping> addExtraToppings(ArrayList<Topping> toppingsForTacoArrayList, HashMap<Integer,Topping> toppingMap) {
         int extraToppingChoice = 0;
 
@@ -491,7 +379,6 @@ public class UserInterface {
         } while (true);
         return toppingsForTacoArrayList;
     }
-
     private void addDeepFriedToTaco() {
         int deepFriedChoice = 0;
         do {
@@ -520,7 +407,103 @@ public class UserInterface {
         System.out.println("");
     }
 
-    // THIS HASHMAP STARTS EMPTY AND THIS METHOD FILLS IT OUT ACCORDING TO THE USERINPUT
+    // DRINK METHODS : SELECT_DRINK_FLAVOR : SELECT_DRINK_SIZE
+    private void selectDrinkFlavor() {
+
+        int drinkSelection = 0;
+
+        do {
+            System.out.println("""
+                
+                Please select a drink:
+                1) Horchata
+                2) Jamaica
+                3) Tamarindo
+                """);
+
+            drinkSelection = Integer.parseInt(this.scanner.nextLine());
+
+            if (drinkSelection == 1){
+                this.drink.setFlavor("Horchata");
+            } else if (drinkSelection == 2) {
+                this.drink.setFlavor("Jamaica");
+            } else if (drinkSelection == 3) {
+                this.drink.setFlavor("Tamarindo");
+            } else {
+                System.out.println("Try again. PLease select a valid entry.");
+                drinkSelection = 0;
+            }
+        } while (drinkSelection == 0);
+        selectDrinkSize();
+    }
+    private void selectDrinkSize() {
+        int drinkSizeSelection = 0;
+
+        do {
+            System.out.println("""
+                    
+                    Please select a size:
+                    1) Small - $2.00
+                    2) Medium - $2.50
+                    3) Large - $3.00 """);
+
+            drinkSizeSelection = Integer.parseInt(this.scanner.nextLine());
+
+            if (drinkSizeSelection == 1){
+                this.drink.setSize("Small");
+            } else if (drinkSizeSelection == 2){
+                this.drink.setSize("Medium");
+            } else if (drinkSizeSelection == 3) {
+                this.drink.setSize("Large");
+            } else {
+                System.out.println("Try again. PLease select a valid entry.");
+                drinkSizeSelection = 0;
+            }
+        } while (drinkSizeSelection == 0);
+        System.out.println("");
+        System.out.println("Drink Added: ");
+        System.out.println(this.drink.toString());
+        System.out.println("");
+        this.order.addDrink(this.drink);
+    }
+
+    // SIDE METHOD - ADD_SIDE_TO_ORDER
+    private void addSideToOrder() {
+        int sideSelection = 0;
+
+        do {
+            System.out.println("""
+                    
+                    Please select a side:
+                    1) Lime Wedges - Free
+                    2) Crema - Free
+                    3) Chips and Salsa - $1.50""");
+
+            sideSelection = Integer.parseInt(this.scanner.nextLine());
+
+            this.side.setPrice(0);
+
+            if (sideSelection == 1){
+                this.side.setName("Lime Wedges");
+            } else if (sideSelection == 2) {
+                this.side.setName("Crema");
+            } else if (sideSelection == 3) {
+                this.side.setName("Chips and Salsa");
+                this.side.setPrice(1.50);
+            } else {
+                System.out.println("Invalid entry. Please try again.");
+                sideSelection = 0;
+            }
+        } while (sideSelection == 0);
+        System.out.println("");
+        System.out.println("Side added: ");
+        System.out.println(this.side.toString());
+        System.out.println("");
+        this.order.addSide(this.side);
+    }
+
+    // HELPER METHODS
+    // THIS HASHMAP STARTS EMPTY AND THIS METHOD FILLS IT OUT ACCORDING TO THE USER_INPUT
     // HashMap has two sections: Integer and Topping (Key and Value) named toppingMenuHelper
     // The parameter is ONE of the arraylists in the topping class
     public HashMap<Integer, Topping> toppingMenuHelper(ArrayList<Topping> selectedToppingList){
@@ -545,5 +528,22 @@ public class UserInterface {
             index ++;
         }
         return toppingMap;
+    }
+    private void printTacoTortillaOptions(){
+        System.out.println("""
+                
+                Choose tortilla type:
+                1) Corn
+                2) Flour
+                3) Hard Shell""");
+
+    }
+    private void printBurritoTortillaOptions(){
+        System.out.println("""
+               
+               Choose tortilla type:
+               1) Corn
+               2) Flour
+               3) Bowl""");
     }
 }

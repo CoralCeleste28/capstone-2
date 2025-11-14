@@ -3,9 +3,8 @@ public class Side implements Cost{
     double price;
 
     public Side (){
-
     }
-
+    // GETTERS
     public String getName() {
         return name;
     }
@@ -14,6 +13,7 @@ public class Side implements Cost{
         return price;
     }
 
+    // SETTERS
     public void setName(String name) {
         this.name = name;
     }
@@ -22,6 +22,7 @@ public class Side implements Cost{
         this.price = price;
     }
 
+    // DISPLAY IN UI
     @Override
     public String toString() {
         return this.name + " - " + this.price;
