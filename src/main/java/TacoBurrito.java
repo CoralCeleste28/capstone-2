@@ -68,7 +68,6 @@ public class TacoBurrito implements Cost {
                "Deep Fried: " + (isDeepFried ? "Yes" : "No");
     }
 
-
     @Override
     public double calcTotalCost() {
         double tacoBurritoCost = 0;

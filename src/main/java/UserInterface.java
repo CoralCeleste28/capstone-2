@@ -245,7 +245,7 @@ public class UserInterface {
                 toppingMap = toppingMenuHelper(Topping.sauceToppingsList(false));
                 sauceChoice = Integer.parseInt(this.scanner.nextLine());
                 if (sauceChoice == 0){
-
+                    //a
                 } else {
                     if (toppingMap.get(sauceChoice) == null){
                         System.out.println("Invalid Selection. Please Try Again.");
