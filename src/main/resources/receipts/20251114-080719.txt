@@ -1,11 +1,10 @@
 PlateType: Single Taco
 ShellType: Corn
-Toppings: 
-Deep Fried: No
-
+Toppings: Carne Asada, Oaxaca, Onion, Habanero, Extra Carne Asada, Extra Oaxaca, Extra Onion, Extra Habanero Sauce, 
+Deep Fried: Yes
 =============================================
 Medium - Horchata
 =============================================
-Crema - 0.0
+Chips and Salsa - 1.5
 =============================================
-Total: $6.0
+Total: $10.05

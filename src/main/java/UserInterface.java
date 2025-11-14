@@ -22,7 +22,7 @@ public class UserInterface {
         int homescreenSelection = 0;
 
         do {
-            System.out.printf("""
+            System.out.print("""
                 ┌──────────────────────────────────┐
                 | WELCOME TO CHIQI'S TACOS NEAR ME |
                 └──────────────────────────────────┘
@@ -95,7 +95,7 @@ public class UserInterface {
         int shellTypeForTacoChoice = 0;
 
         do {
-            if (isBurrito == true) {
+            if (isBurrito) {
                 printBurritoTortillaOptions();
             } else {
                 printTacoTortillaOptions();
@@ -108,7 +108,7 @@ public class UserInterface {
             } else if (shellTypeForTacoChoice == 2) {
                 this.tacoBurrito.setShellType("Flour");
             } else if (shellTypeForTacoChoice == 3) {
-                if (isBurrito == true) {
+                if (isBurrito) {
                     this.tacoBurrito.setShellType("Bowl");
                 }  else {
                     this.tacoBurrito.setShellType("Hard Shell");
@@ -132,7 +132,7 @@ public class UserInterface {
         int toppingChoice = 5;
 
         do {
-            System.out.printf("""
+            System.out.print("""
                     
                     Choose Toppings
                     0) Done Adding
